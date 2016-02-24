@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery中的Ajax</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<script type="text/javascript" src=" jQuery/jquery-2.2.0.js"></script>			<!--../代表上级目录-->
+	<style type="text/css">
+		p.p1{
+			font-family: 幼圆;
+			font-size: 1.6em;
+			margin-left: 10px;
+			color: black;
+		}
+
+		p.p2{
+			font-family: 幼圆;
+			font-size: 1.3em;
+			margin-left: 10px;
+			color: black;
+		}
+		p.p3{
+			font-family: 幼圆;
+			margin-left: 20px;
+			color: black;
+		}
+
+	</style>
+</head>
+<body>
+	<p class="p2">jQuery对Ajax进行了封装，在jQuery中$.ajax()方法属于最底层的方法，第二层是load(),$.get()方法，第三层是$.getScript()和$.getJAON()方法。首先介绍第二层的方法，因为其使用频率很高。</p>
+	<p class="p1">一）load()方法</p>
+	<p class="p2">1)load()方法</p>
+	<p class="p2">load()方法是jQuery中最为简单和常用的Ajax方法，能载入远程HTML代码并插入DOM中，它的结构为：load(url[.data][.callback]),参数解释如下</p>
+	<p class="p2">&nbsp;url:String型，请求HTML页面的URL地址。</p>
+	<p class="p2">&nbsp;data(可选)：Object型，发送至服务器的key/value数据</p>
+	<p class="p2">&nbsp;callback(可选)：Function型，请求完成时的回调函数，无论请求成功或失败。</p>
+	<p class="p2">点击按钮使用ajax获取test.html里面的内容</p>
+	<button id="button1">Ajax获取</button>
+	<div class="comment">已有评论</div>
+	<div class="resText"></div>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#button1").click(function(){
+				$(".resText").load("test.html");
+			})
+		})
+	</script>
+</body>
+</html>
