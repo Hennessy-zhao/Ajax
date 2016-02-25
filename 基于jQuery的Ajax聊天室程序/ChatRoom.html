@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>聊天室</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<script type="text/javascript" src=" ../jQuery/jquery-2.2.0.js"></script>	
+	<style type="text/css">
+		#chat{
+			width: 70%;
+			height: auto;
+			padding-bottom: 50px;
+			border:1px solid black;
+		}
+	</style>	
+</head>
+<body>
+ 	<div id="chat"></div>
+ 	<div id="wirte">
+ 		<p>姓名：<input type="text" id="username" name="username"></p>
+ 		<p>内容：</p>
+ 		<textarea id="content" name="content" cols="50" rows="5"></textarea>
+ 		<p><button id="send">发送</button></p>
+ 	</div>
+</body>
+</html>
+
+<!-- create table chatroom(
+	id int not null primary key auto_increment,
+	user varchar(255) not null,
+	msg text not null,
+	time int not null
+); -->

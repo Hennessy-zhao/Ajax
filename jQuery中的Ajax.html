@@ -29,7 +29,7 @@
 <body>
 	<p class="p2">jQuery对Ajax进行了封装，在jQuery中$.ajax()方法属于最底层的方法，第二层是load(),$.get()方法，第三层是$.getScript()和$.getJAON()方法。首先介绍第二层的方法，因为其使用频率很高。</p>
 	<p class="p1">一）load()方法</p>
-	<p class="p2">1)load()方法</p>
+	<p class="p2">1)载入HTML文档</p>
 	<p class="p2">load()方法是jQuery中最为简单和常用的Ajax方法，能载入远程HTML代码并插入DOM中，它的结构为：load(url[.data][.callback]),参数解释如下</p>
 	<p class="p2">&nbsp;url:String型，请求HTML页面的URL地址。</p>
 	<p class="p2">&nbsp;data(可选)：Object型，发送至服务器的key/value数据</p>
@@ -38,11 +38,85 @@
 	<button id="button1">Ajax获取</button>
 	<div class="comment">已有评论</div>
 	<div class="resText"></div>
+	<p class="p2">2)筛选载入的HTML文档</p>
+	<p class="p2">上个例子是将test.html页面中的内容都加载到id为resText的元素里，如果只需要加载test.html页面的某些元素，那么可以使用load()方法属于最底层的方法，第二层是load()方法的URL参数来达到目的。通过为URL参数指定选择符，就可以很方便的从加载过来的HTML文档里筛选出所需要的内容</p>
+	<p class="p2">load()方法的URL参数的语法结构为：url selector.	例子如下：</p>
+	<button id="button2">筛选载入的HTML文档</button>
+	<div class="resText2"></div>
+	<p class="p2">3)传递方式</p>
+	<p class="p2">load()方法的传递方式根据参数data来自动指定，如果没有参数传递，则采用GET方式传递，反之，则会自动转换为POST方式。关于GET和POST的区别，将在后面进行讲解</p>
+	<p class="p2">4)回调参数</p>
+	<p class="p2">对于必须在加载完后才能继续的操作，load()方法提供了回调函数(callback)，该函数有3个参数，分别代表请求返回的内容，请求状态和xmlhttpRequest对象，如：</p>
+	<p class="p3">$("#resText").load("test.html",function(responseText,textStatus,XMLHttpRequest){</p>
+	<p class="p3">//responseText:请求返回的内容</p>
+	<p class="p3">//textStatus:请求状态：success,error,notmodified,timeout4种</p>
+	<p class="p3">//XMLHttpRequest:XMLHttpRequest对象</p>
+	<p class="p3">});</p>
+	<br/>
+	<br/>
+	<p class="p1">二）$.get()方法和$.post()方法</p>
+	<p class="p2">1)$.get()方法</p>
+	<p class="p2">结构：$.get(url[,data][,callback][,type]);	参数解释如下</p>
+	<p class="p2">&nbsp;url:String型，请求的HTML页的URL地址</p>
+	<p class="p2">&nbsp;data(可选)：Object型，发送至服务器的key/value数据会作为QueryString附加到请求URL中</p>
+	<p class="p2">&nbsp;callback(可选)：Function型，载入成功时回调函数自动将请求结果和状态传递给该方法</p>
+	<p class="p2">&nbsp;&nbsp;&nbsp;回调函数只有两个参数function(data,textStatus) data:返回的内容。textStatus:请求状态：success,error,notmodified,timeout四种</p>
+	<p class="p2">&nbsp;type(可选)：String型，服务器端返回内容的格式，包括xml,html,script,json,text和_default</p>
+	<p class="p2">&nbsp;&nbsp;a)使用参数:例子如下</p>
+	<form action="#" id="form1">
+		<p>评论</p>
+		<p>姓名：<input type="text" name="username" id="username"></p>
+		<p>内容：<textarea name="content" id="content" rows="2" cols="20"></textarea></p>
+		<p><input type="button" id="send" value="提交"></p>
+	</form>
+	<div class="comment">已有评论：</div>
+	<div id="resText3"></div>
+	<p class="p2">&nbsp;&nbsp;b)数据格式:这里有HTML片段，XML文档，JSON文件三种，书上写的不明白不了解！！！</p>
+	<p class="p2">1)$.post()方法</p>
+	<p class="p2">此部分暂时不完全了解，继续钻研中</p>
+	<br/>
+	<br/>
+	<p class="p1">三）$.getScript()方法和$.getJson()方法</p>
+	<p class="p2">1)$.getScript()</p>
+	<p class="p2">jQuery提供了此方法来直接加载js文件，与加载一个HTML片段一样简单方便，并且不需要对JS文件进行处理，JS文件会自动执行</p>
+	<button id="button3">点击加载JS文件</button>
+	<p class="p2">与其他Ajax方法一样，此方法也有回调函数</p>
+	<p class="p2">2)$.getJSON()</p>
+	<p class="p2">$.getJSON()方法用于加载JSON文件，与$.getScript()方法用法相同</p>
+	<p class="p2">3)$.ajax()方法</p>
+	<p class="p2">$.ajax()方法是jQuery最底层的Ajax实现，它的结构为：$.ajax(options);</p>
+	<p class="p2">该方法只有一个参数，但在这个对象里包含了$.ajax()方法所需的请求设置以及回调函数等信息，参数以key/value的形式存在，所有参数都是可选的，参数列表见书P189</p>
+	<p class="p2">前面用到的所有方法都可以用$.ajax()来实现代替</p>
+
 
 	<script type="text/javascript">
+		//load()方法
 		$(function(){
 			$("#button1").click(function(){
 				$(".resText").load("test.html");
+			});
+
+			$("#button2").click(function(){
+				$(".resText2").load("test.html .para")
+			});
+		});
+
+		//$.get()方法
+		$(function(){
+			$("#send").click(function(){
+				$.get("get1.php",{
+					username:$("#username").val(),
+					content:$("#content").val()
+				},function(data,success){
+					$("#resText3").html(data);
+				});
+			})
+		})
+
+		//$.getScript()方法
+		$(function(){
+			$("#button3").click(function(){
+				$.getScript('js1.js');
 			})
 		})
 	</script>

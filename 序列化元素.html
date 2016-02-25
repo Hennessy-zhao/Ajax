@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+	<script type="text/javascript" src=" jQuery/jquery-2.2.0.js"></script>			<!--../代表上级目录-->
+	<style type="text/css">
+		p.p1{
+			font-family: 幼圆;
+			font-size: 1.6em;
+			margin-left: 10px;
+			color: black;
+		}
+
+		p.p2{
+			font-family: 幼圆;
+			font-size: 1.3em;
+			margin-left: 10px;
+			color: black;
+		}
+		p.p3{
+			font-family: 幼圆;
+			margin-left: 20px;
+			color: black;
+		}
+
+	</style>
+</head>
+<body>
+	<p class="p1">1)serialize()方法</p>
+	<p class="p2">做项目时，表单必不可少，使用此方法可以异步提交表单，例如：</p>
+	<form id="form1" action="#">
+		<p>评论：</p>
+		<p>姓名：<input type="text" name="username" id="username"></p>
+		<p>内容：<textarea name="content" id="content" rows="2" cols="20"></textarea></p>
+		<button id="send">提交</button>
+	</form>
+	<div id="resText"></div>
+
+	<script type="text/javascript">
+		$(function(){
+			$("#send").click(function(){
+				$.get("get1.php",$("#form1").serialize(),function(data,textStatus){
+					$("#resText").html(data);
+				});
+			});
+		})
+	</script>
+</body>
+</html>
